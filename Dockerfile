@@ -97,5 +97,8 @@ ENV SHELL=/bin/bash \
     GOPATH=/home/project
 ENV PATH=$PATH:$GOPATH/bin
 
+RUN git config --global user.email "theia@example.com" && \
+    git config --global user.name "Theia"
+
 EXPOSE 3000
 ENTRYPOINT [ "node", "/home/theia/src-gen/backend/main.js", "/home/project", "--hostname=0.0.0.0" ]
