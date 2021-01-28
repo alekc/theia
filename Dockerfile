@@ -24,15 +24,14 @@ FROM node:$NODE_VERSION
 COPY --from=theia /home/theia /home/theia
 
 ENV DOCKERVERSION=20.10.2
-RUN apt-get update \
+RUN curl -fsSLO https://download.docker.com/linux/static/stable/x86_64/docker-${DOCKERVERSION}.tgz \
+    && tar xzvf docker-${DOCKERVERSION}.tgz --strip 1 -C /usr/local/bin docker/docker \
+    && rm docker-${DOCKERVERSION}.tgz \
+    && apt-get update \
     && apt install -y python3-pip \
-    && pip3 install docker docker-compose
-#RUN curl -fsSLO https://download.docker.com/linux/static/stable/x86_64/docker-${DOCKERVERSION}.tgz \
-#  && tar xzvf docker-${DOCKERVERSION}.tgz --strip 1 \
-#     -C /usr/local/bin docker/docker \
-#  && rm docker-${DOCKERVERSION}.tgz \
-#  && apt-get update \
-#  && apt-get install -y docker-compose
+    && pip3 install docker docker-compose \
+    && apt-get clean autoclean \
+    && apt-get autoremove --yes
 
 WORKDIR /home/theia
 
