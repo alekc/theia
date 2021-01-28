@@ -28,12 +28,14 @@ RUN curl -fsSLO https://download.docker.com/linux/static/stable/x86_64/docker-${
     && tar xzvf docker-${DOCKERVERSION}.tgz --strip 1 -C /usr/local/bin docker/docker \
     && rm docker-${DOCKERVERSION}.tgz \
     && apt-get update \
-    && apt install -y python3-pip \
+    && apt install -y python3-pip vim \
     && pip3 install docker docker-compose \
     && apt-get clean autoclean \
     && apt-get autoremove --yes
 
 WORKDIR /home/theia
+ADD .bashrc /home/theia/.bashrc
+ADD .bashrc /root/.bashrc
 
 # See: https://github.com/theia-ide/theia-apps/issues/34
 RUN adduser --disabled-password --gecos '' theia && \
