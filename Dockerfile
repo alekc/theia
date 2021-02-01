@@ -103,5 +103,6 @@ RUN echo $PATH
 RUN git config --global user.email "theia@example.com" && \
     git config --global user.name "Theia"
 
+ENV PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/usr/local/cuda/bin
 EXPOSE 3000
 ENTRYPOINT [ "node", "/home/theia/src-gen/backend/main.js", "/home/project", "--hostname=0.0.0.0" ]
