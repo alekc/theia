@@ -55,7 +55,9 @@ ENV GO_VERSION=1.15 \
     GOARCH=amd64 \
     GOROOT=/home/go \
     GOPATH=/home/go-tools
+RUN echo $PATH
 ENV PATH=$GOPATH/bin:$GOROOT/bin:$PATH
+RUN echo $PATH
 
 # Install Go
 RUN curl -fsSL https://storage.googleapis.com/golang/go$GO_VERSION.$GOOS-$GOARCH.tar.gz | tar -C /home -xzv
@@ -97,6 +99,7 @@ ENV SHELL=/bin/bash \
     GOPATH=/home/project
 ENV PATH=$PATH:$GOPATH/bin
 
+RUN echo $PATH
 RUN git config --global user.email "theia@example.com" && \
     git config --global user.name "Theia"
 
